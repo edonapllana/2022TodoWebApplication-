@@ -29,18 +29,28 @@ function App() {
 					<div className="row">
 						<div className="input-field col s6">
 							<i className="material-icons prefix">title</i>
-							<input id="icon_prefix" type="text" className="validate" />
+							<input
+								id="icon_prefix"
+								type="text"
+								className="validate"
+								onChange={(e) => setTodo({ ...todo, title: e.target.value })}
+							/>
 							<label htmlFor="icon_prefix">Title</label>
 						</div>
 						<div className="input-field col s6">
 							<i className="material-icons prefix">description</i>
-							<input id="description" type="tel" className="validate" />
+							<input
+								id="description"
+								type="tel"
+								className="validate"
+								onChange={(e) => setTodo({ ...todo, content: e.target.value })}
+							/>
 							<label htmlFor="icon_telephone">content</label>
 						</div>
 					</div>
-          <div className="row right-align">
-            <button className="waves-effect waves-light">Save</button>
-          </div>
+					<div className="row right-align">
+						<button className="waves-effect waves-light">Save</button>
+					</div>
 				</form>
 				<Preloader />
 				<div class="collection">
