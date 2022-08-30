@@ -53,22 +53,29 @@ function App() {
 						<button className="waves-effect waves-light">Save</button>
 					</div>
 				</form>
-				{
-          !todos? <Preloader/> : todos.length > 0 ? <div class="collection">
-					<a href="#!" class="collection-item">
-						Alvin
-					</a>
-					<a href="#!" class="collection-item active">
-						Alvin
-					</a>
-					<a href="#!" class="collection-item">
-						Alvin
-					</a>
-					<a href="#!" class="collection-item">
-						Alvin
-					</a>
-				</div>:<div><h5>Nothing to load :c!</h5></div>
-        }
+				{!todos ? (
+					<Preloader />
+				) : todos.length > 0 ? (
+					<ul className="collection">
+						{todos.map((todo) => (
+							<li key = {todo._id} className="collection-item">
+								<div>
+									<h5>{todo.title}</h5>
+									<p>
+										{todo.content}
+										<a href="#!" className="secondary-content">
+											<i className="material-icons">send</i>
+										</a>
+									</p>
+								</div>
+							</li>
+						))}
+					</ul>
+				) : (
+					<div>
+						<h5>Nothing to load :c!</h5>
+					</div>
+				)}
 			</div>
 		</div>
 	);
