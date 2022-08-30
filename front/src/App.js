@@ -6,11 +6,12 @@ import { createTodo } from "../functions";
 
 function App() {
   const [todo, setTodo] = useState({title: '', content: ''});
+  const [todos, setTodos] = useState(null);
 
   useEffect(() =>{
     const fetchData = async ()=> {
       const result = await readTodos();
-      console.log(result);
+      setTodos(result);
     }
     fetchData;
   }, [])
@@ -52,8 +53,8 @@ function App() {
 						<button className="waves-effect waves-light">Save</button>
 					</div>
 				</form>
-				<Preloader />
-				<div class="collection">
+				{
+          !todos? <Preloader/> : todos.length > 0 ? <div class="collection">
 					<a href="#!" class="collection-item">
 						Alvin
 					</a>
@@ -66,7 +67,8 @@ function App() {
 					<a href="#!" class="collection-item">
 						Alvin
 					</a>
-				</div>
+				</div>:<div><h5>Nothing to load :c!</h5></div>
+        }
 			</div>
 		</div>
 	);
