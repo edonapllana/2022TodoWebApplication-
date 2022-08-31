@@ -31,7 +31,7 @@ function App() {
   useEffect(() => {
     const clearField = (e) => {
       if(e.keyCode === 27) {
-        clear()
+        clear();
       }
     }
     window.addEventListener('keydown', clearField);
@@ -43,7 +43,7 @@ function App() {
 
     const result = await createTodo(todo);
 
-    console.log(result);
+    setTodos([...todos, result]);
   }
   return (
 		<div className="container">
