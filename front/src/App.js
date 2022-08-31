@@ -27,6 +27,17 @@ function App() {
     setTodo({title: '', content: ''});
     
   }
+
+  useEffect(() => {
+    const clearField = (e) => {
+      if(e.keyCode === 27) {
+        clear()
+      }
+    }
+    window.addEventListener('keydown', clearField);
+  return () => window.removeEventListener('keydown', clearField);
+  }, [])
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
