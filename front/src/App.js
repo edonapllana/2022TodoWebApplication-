@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
-import { readTodos } from "../functions";
-import Preloader from "../components/Preloader";
-import { createTodo } from "../functions";
+import { readTodos } from "./functions";
+import Preloader from "./components/Preloader";
+import { createTodo } from "./functions";
 
 
 function App() {
   const [todo, setTodo] = useState({title: '', content: ''});
   const [todos, setTodos] = useState(null);
+  const [currentId, setCurrentId] = useState(0);
+  
+  useEffect(() => {
+    let currentTodo = currentId!=0?todos.find(todo=>todo._id===currentId):{title: '', content: ''}
+    setTodo(currentTodo)
+  }, [currentId])
 
   useEffect(() =>{
     const fetchData = async ()=> {
@@ -16,6 +22,11 @@ function App() {
     fetchData;
   }, [])
 
+  const clear = ()=> {
+    setCurrentId(0);
+    setTodo({title: '', content: ''});
+    
+  }
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
@@ -34,6 +45,7 @@ function App() {
 								id="icon_prefix"
 								type="text"
 								className="validate"
+                value ={todo.title}
 								onChange={(e) => setTodo({ ...todo, title: e.target.value })}
 							/>
 							<label htmlFor="icon_prefix">Title</label>
@@ -44,6 +56,7 @@ function App() {
 								id="description"
 								type="tel"
 								className="validate"
+                value={todo.content}
 								onChange={(e) => setTodo({ ...todo, content: e.target.value })}
 							/>
 							<label htmlFor="icon_telephone">content</label>
@@ -58,7 +71,9 @@ function App() {
 				) : todos.length > 0 ? (
 					<ul className="collection">
 						{todos.map((todo) => (
-							<li key = {todo._id} className="collection-item">
+							<li key = {todo._id} 
+              onClick={() => setCurrentId(todo._id)}
+              className="collection-item">
 								<div>
 									<h5>{todo.title}</h5>
 									<p>
