@@ -8,9 +8,18 @@ export const readTodos = async ()=> {
 	}
 }
 
-export const createTodo = async () => {
+export const createTodo = async (todo) => {
 	try {
-		const { data } = await api.createTodo();
+		const { data } = await api.createTodo(todo);
+		return data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const updateTodo = async (id, todo) => {
+	try {
+		const { data } = await api.updateTodo(todo);
 		return data;
 	} catch (error) {
 		console.log(error);
