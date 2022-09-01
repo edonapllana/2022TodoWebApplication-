@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { readTodos } from "./functions";
 import Preloader from "./components/Preloader";
 import { createTodo } from "./functions";
+import { updateTodo } from "./functions";
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
       setTodos(result);
     }
     fetchData();
-  }, [])
+  }, [currentId])
 
   const clear = ()=> {
     setCurrentId(0);
@@ -40,10 +41,15 @@ function App() {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-
-    const result = await createTodo(todo);
-
-    setTodos([...todos, result]); 
+		if(currentId === 0){
+			const result = await createTodo(todo);
+			setTodos([...todos, result]); 
+			clear();
+		}else {
+			await updateTodo(currentId, todo);
+			clear();
+		}
+    
   }
   return (
 		<div className="container">

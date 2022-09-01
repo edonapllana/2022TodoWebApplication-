@@ -19,7 +19,7 @@ export const createTodo = async (todo) => {
 
 export const updateTodo = async (id, todo) => {
 	try {
-		const { data } = await api.updateTodo(todo);
+		const { data } = await api.updateTodo(id, todo);
 		return data;
 	} catch (error) {
 		console.log(error);
