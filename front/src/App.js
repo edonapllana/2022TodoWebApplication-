@@ -3,6 +3,7 @@ import { readTodos } from "./functions";
 import Preloader from "./components/Preloader";
 import { createTodo } from "./functions";
 import { updateTodo } from "./functions";
+import { deleteTodo } from "./api";
 
 
 function App() {
@@ -51,6 +52,14 @@ function App() {
 		}
     
   }
+
+	const removeTodo = async (id) => {
+		await deleteTodo(id);
+		const todosCopy = [...todos];
+		todosCopy.filter(todo => todo._id !== id);
+		setTodos(todosCopy);
+	}
+
   return (
 		<div className="container">
 			<div className="row">
@@ -95,7 +104,8 @@ function App() {
 									<h5>{todo.title}</h5>
 									<p>
 										{todo.content}
-										<a href="#!" className="secondary-content">
+										<a href="#!" onClick={()=> removeTodo(todo._id)} 
+											className="secondary-content">
 											<i className="material-icons">send</i>
 										</a>
 									</p>
