@@ -19,7 +19,7 @@ function App() {
       const result = await readTodos();
       setTodos(result);
     }
-    fetchData;
+    fetchData();
   }, [])
 
   const clear = ()=> {
@@ -43,7 +43,7 @@ function App() {
 
     const result = await createTodo(todo);
 
-    setTodos([...todos, result]);
+    setTodos([...todos, result]); 
   }
   return (
 		<div className="container">
