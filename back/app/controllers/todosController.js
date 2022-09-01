@@ -34,8 +34,19 @@ const updateTodos = async(req, res) => {
 		res.json(todo);
 }
 
+const deleteTodo = async (req, res) => {
+	const { id } = req.params;
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		return res.status(404).send(`Your id ${id} isn't valid!`);
+	}
+	await Todo.findByIdAndRemove(id);
+	
+	res.json(todo);
+};
+
 module.exports = {
 	readTodos,
 	createTodos,
 	updateTodos,
+	deleteTodo
 };
